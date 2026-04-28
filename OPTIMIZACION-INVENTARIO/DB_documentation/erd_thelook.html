@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TheLook eCommerce — Diagrama ERD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        p.desc {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid {
+            min-width: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TheLook eCommerce — Diagrama ERD</h1>
+
+    <div class="container">
+        <div class="mermaid">
+            erDiagram
+
+            %% ===================== RELACIONES =====================
+
+            %% USUARIOS → ÓRDENES Y EVENTOS
+            users ||--o{ orders : "1:N"
+            users ||--o{ events : "1:N"
+            users ||--o{ order_items : "1:N (desnormalizado)"
+
+            %% ÓRDENES → LÍNEAS DE ORDEN
+            orders ||--o{ order_items : "1:N"
+
+            %% PRODUCTOS → INVENTARIO Y LÍNEAS DE ORDEN
+            products ||--o{ inventory_items : "1:N"
+            products ||--o{ order_items : "1:N"
+
+            %% INVENTARIO → LÍNEAS DE ORDEN
+            inventory_items ||--o| order_items : "1:1"
+
+            %% CENTROS DE DISTRIBUCIÓN → INVENTARIO Y PRODUCTOS
+            distribution_centers ||--o{ inventory_items : "1:N"
+            distribution_centers ||--o{ products : "1:N"
+
+            %% ===================== ENTIDADES =====================
+
+            users {
+            integer id PK
+            string first_name
+            string last_name
+            string email
+            integer age
+            string gender
+            string state
+            string street_address
+            string postal_code
+            string city
+            string country
+            float latitude
+            float longitude
+            string traffic_source
+            timestamp created_at
+            }
+
+            orders {
+            integer order_id PK
+            integer user_id FK
+            string status
+            string gender
+            timestamp created_at
+            timestamp returned_at
+            timestamp shipped_at
+            timestamp delivered_at
+            integer num_of_item
+            }
+
+            order_items {
+            integer id PK
+            integer order_id FK
+            integer user_id FK
+            integer product_id FK
+            integer inventory_item_id FK
+            string status
+            timestamp created_at
+            timestamp shipped_at
+            timestamp delivered_at
+            timestamp returned_at
+            float sale_price
+            }
+
+            products {
+            integer id PK
+            float cost
+            string category
+            string name
+            string brand
+            float retail_price
+            string department
+            string sku
+            integer distribution_center_id FK
+            }
+
+            inventory_items {
+            integer id PK
+            integer product_id FK
+            timestamp created_at
+            timestamp sold_at
+            float cost
+            string product_category
+            string product_name
+            string product_brand
+            float product_retail_price
+            string product_department
+            string product_sku
+            integer product_distribution_center_id FK
+            }
+
+            distribution_centers {
+            integer id PK
+            string name
+            float latitude
+            float longitude
+            }
+
+            events {
+            integer id PK
+            integer user_id FK
+            integer sequence_number
+            string session_id
+            timestamp created_at
+            string ip_address
+            string city
+            string state
+            string postal_code
+            string browser
+            string traffic_source
+            string uri
+            string event_type
+            }
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            er: {
+                diagramPadding: 30,
+                layoutDirection: 'LR',
+                minEntityWidth: 220,
+                minEntityHeight: 100,
+                entityPadding: 20,
+                stroke: '#333',
+                fill: '#f0f4f8',
+                fontSize: 14,
+                useMaxWidth: false
+            }
+        });
+    </script>
+</body>
+
+</html>
