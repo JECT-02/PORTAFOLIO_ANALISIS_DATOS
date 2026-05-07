@@ -1,4 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data & Env
 *.env
 *.claves.json
-*/claves/*.json
-*/data
+**/claves/*.json
+**/data/
