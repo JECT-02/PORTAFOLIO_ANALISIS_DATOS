@@ -87,3 +87,36 @@ def detect_inventory_cost_outlier_categories(df):
             outlier_categories.append(category)
 
     return outlier_categories
+
+def detect_inventory_cost_outlier_categories(df, value_col="log_cost",outlier_threshold=0.05):
+    results = []
+
+    for category, group in df.groupby("category"):
+
+        q1 = group[value_col].quantile(0.25)
+        q3 = group[value_col].quantile(0.75)
+
+        iqr = q3 - q1
+
+        lower_bound = q1 - 1.5 * iqr
+        upper_bound = q3 + 1.5 * iqr
+
+        outliers = group[
+            (group[value_col] < lower_bound) |
+            (group[value_col] > upper_bound)
+        ]
+
+        outlier_rate = len(outliers) / len(group)
+
+        results.append({
+            "category": category,
+            "n_records": len(group),
+            "n_outliers": len(outliers),
+            "outlier_rate": outlier_rate,
+            "has_high_outliers": outlier_rate > outlier_threshold
+        })
+
+    return pd.DataFrame(results).sort_values(
+        "outlier_rate",
+        ascending=False
+    )
