@@ -25,3 +25,23 @@ def get_log_normal_categories(df, skew_limit=1.0, kurtosis_limit=2.0):
             normal_categories.append(category)
             
     return normal_categories
+
+def detect_outliers_zscore(df, value_col="log_cost", threshold=3):
+    df = df.copy()
+    
+    z_scores = df.groupby("category")[value_col].transform(
+        lambda x: (x - x.mean()) / x.std()
+    )
+    
+    return df[abs(z_scores) > threshold]
+
+def get_sigma_segmentation(df, value_col="log_cost"):
+    def segment_group(x):
+        m, s = x.mean(), x.std()
+        
+        bins = [-np.inf, m - s, m + s, m + 2*s, np.inf]
+        labels = ["Bajo", "Medio", "Alto", "Premium"]
+        
+        return pd.cut(x, bins=bins, labels=labels)
+    
+    return df.groupby("category", group_keys=False)[value_col].apply(segment_group)

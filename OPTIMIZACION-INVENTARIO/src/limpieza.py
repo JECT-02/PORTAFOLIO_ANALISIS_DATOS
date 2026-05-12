@@ -71,31 +71,34 @@ def detect_inventory_age_outlier_categories(df):
 
 
 
-def detect_inventory_cost_outlier_categories(df):
+def detect_inventory_cost_outlier_categories(df, categories=None, value_col="cost"):
+    if categories is None:
+        categories = df["category"].unique()
+        
     outlier_categories = []
+    
+    df_filtered = df[df["category"].isin(categories)]
 
-    for category, group in df.groupby("category"):
-        q1 = group["cost"].quantile(0.25)
-        q3 = group["cost"].quantile(0.75)
+    for category, group in df_filtered.groupby("category"):
+        q1 = group[value_col].quantile(0.25)
+        q3 = group[value_col].quantile(0.75)
         iqr = q3 - q1
 
         lower_bound = q1 - 1.5 * iqr
         upper_bound = q3 + 1.5 * iqr
 
-        if ((group["cost"] < lower_bound) | 
-            (group["cost"] > upper_bound)).any():
+        if ((group[value_col] < lower_bound) | 
+            (group[value_col] > upper_bound)).any():
             outlier_categories.append(category)
 
     return outlier_categories
 
-def detect_inventory_cost_outlier_categories(df, value_col="log_cost",outlier_threshold=0.05):
+def get_inventory_outlier_report(df, value_col="log_cost", outlier_threshold=0.05):
     results = []
 
     for category, group in df.groupby("category"):
-
         q1 = group[value_col].quantile(0.25)
         q3 = group[value_col].quantile(0.75)
-
         iqr = q3 - q1
 
         lower_bound = q1 - 1.5 * iqr
@@ -116,7 +119,4 @@ def detect_inventory_cost_outlier_categories(df, value_col="log_cost",outlier_th
             "has_high_outliers": outlier_rate > outlier_threshold
         })
 
-    return pd.DataFrame(results).sort_values(
-        "outlier_rate",
-        ascending=False
-    )
+    return pd.DataFrame(results).sort_values("outlier_rate", ascending=False)
