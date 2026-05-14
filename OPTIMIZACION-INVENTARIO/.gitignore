@@ -28,6 +28,7 @@ auth.json
 claves/
 credentials/
 secrets/
+claves.json
 *.parquet
 *.csv
 *.sql
