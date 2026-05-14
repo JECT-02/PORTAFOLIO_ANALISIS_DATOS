@@ -1,0 +1,210 @@
+[
+  {
+    "symbol": "AAPL",
+    "price": 298.87,
+    "marketCap": 4389610087720,
+    "name": "Apple Inc.",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "MSFT",
+    "price": 405.21,
+    "marketCap": 3010074120300,
+    "name": "Microsoft Corporation",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "NVDA",
+    "price": 225.83,
+    "marketCap": 5488798509296,
+    "name": "NVIDIA Corporation",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "AMZN",
+    "price": 270.13,
+    "marketCap": 2905815423000,
+    "name": "Amazon.com, Inc.",
+    "sector": "Consumer Cyclical",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "META",
+    "price": 616.63,
+    "marketCap": 1565267858968,
+    "name": "Meta Platforms, Inc.",
+    "sector": "Communication Services",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "GOOGL",
+    "price": 402.62,
+    "marketCap": 4869636677368,
+    "name": "Alphabet Inc.",
+    "sector": "Communication Services",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "TSLA",
+    "price": 445.27,
+    "marketCap": 1672309444400,
+    "name": "Tesla, Inc.",
+    "sector": "Consumer Cyclical",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "JPM",
+    "price": 300.25,
+    "marketCap": 804523303255,
+    "name": "JPMorgan Chase & Co.",
+    "sector": "Financial Services",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "UNH",
+    "price": 401.16,
+    "marketCap": 364311047040,
+    "name": "UnitedHealth Group Incorporated",
+    "sector": "Healthcare",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "V",
+    "price": 320.31,
+    "marketCap": 613978651692,
+    "name": "Visa Inc.",
+    "sector": "Financial Services",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "XOM",
+    "price": 151.56,
+    "marketCap": 628208622000,
+    "name": "Exxon Mobil Corporation",
+    "sector": "Energy",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "COST",
+    "price": 1033.08,
+    "marketCap": 458329041240,
+    "name": "Costco Wholesale Corporation",
+    "sector": "Consumer Defensive",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "JNJ",
+    "price": 230.42,
+    "marketCap": 554671632400,
+    "name": "Johnson & Johnson",
+    "sector": "Healthcare",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "ABBV",
+    "price": 208.5,
+    "marketCap": 368376303179,
+    "name": "AbbVie Inc.",
+    "sector": "Healthcare",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "WMT",
+    "price": 131.47,
+    "marketCap": 1047946198471,
+    "name": "Walmart Inc.",
+    "sector": "Consumer Defensive",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "BAC",
+    "price": 49.84,
+    "marketCap": 353694078046,
+    "name": "Bank of America Corporation",
+    "sector": "Financial Services",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "NFLX",
+    "price": 87.56,
+    "marketCap": 368697648000,
+    "name": "Netflix, Inc.",
+    "sector": "Communication Services",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "CVX",
+    "price": 185.99,
+    "marketCap": 370417684000,
+    "name": "Chevron Corporation",
+    "sector": "Energy",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "KO",
+    "price": 80.26,
+    "marketCap": 345317238869,
+    "name": "The Coca-Cola Company",
+    "sector": "Consumer Defensive",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "AMD",
+    "price": 445.5,
+    "marketCap": 726432300000,
+    "name": "Advanced Micro Devices, Inc.",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "PEP",
+    "price": 149.27,
+    "marketCap": 204043281876,
+    "name": "PepsiCo, Inc.",
+    "sector": "Consumer Defensive",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "CSCO",
+    "price": 101.87,
+    "marketCap": 402375604189,
+    "name": "Cisco Systems, Inc.",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "ADBE",
+    "price": 236.07,
+    "marketCap": 95419494000,
+    "name": "Adobe Inc.",
+    "sector": "Technology",
+    "exchange": "NASDAQ"
+  },
+  {
+    "symbol": "DIS",
+    "price": 104.92,
+    "marketCap": 182194778606,
+    "name": "The Walt Disney Company",
+    "sector": "Communication Services",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "WFC",
+    "price": 73.53,
+    "marketCap": 225015770700,
+    "name": "Wells Fargo & Company",
+    "sector": "Financial Services",
+    "exchange": "NYSE"
+  },
+  {
+    "symbol": "GE",
+    "price": 294.71,
+    "marketCap": 307921742615,
+    "name": "GE Aerospace",
+    "sector": "Industrials",
+    "exchange": "NYSE"
+  }
+]

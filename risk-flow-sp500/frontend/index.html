@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk-Flow S&P 500</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Risk-Flow S&P 500</h1>
+            <p>Simulacion Monte Carlo de Riesgo de Portafolio</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Panel Izquierdo: Controles -->
+        <aside class="sidebar">
+            <section class="control-group">
+                <h2>Parametros de Simulacion</h2>
+                
+                <div class="control-item">
+                    <label>Horizonte (Dias)</label>
+                    <div class="toggle-group" id="horizon-toggles">
+                        <button class="toggle-btn active" data-value="1">1 Dia</button>
+                        <button class="toggle-btn" data-value="5">5 Dias</button>
+                        <button class="toggle-btn" data-value="20">20 Dias</button>
+                    </div>
+                </div>
+
+                <div class="control-item">
+                    <label>Nivel de Confianza</label>
+                    <div class="toggle-group" id="confidence-toggles">
+                        <button class="toggle-btn" data-value="0.90">90%</button>
+                        <button class="toggle-btn active" data-value="0.95">95%</button>
+                        <button class="toggle-btn" data-value="0.99">99%</button>
+                    </div>
+                </div>
+
+                <div class="control-item">
+                    <button id="update-data-btn" class="primary-btn" style="background-color: var(--warning); margin-bottom: 10px;">Actualizar Data</button>
+                    <button id="recalc-btn" class="primary-btn">Recalcular Riesgo</button>
+                </div>
+            </section>
+
+            <section class="control-group">
+                <h2>Asignacion de Portafolio</h2>
+                <div class="table-container">
+                    <table id="portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>Simbolo</th>
+                                <th>Peso (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolio-body">
+                            <!-- Filas generadas dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Panel Derecho: Visualizaciones -->
+        <section class="dashboard">
+            <div class="summary-panel" id="summary-panel">
+                <!-- Se llenara via JS -->
+            </div>
+
+            <div class="metrics-cards" id="metrics-container">
+                <div class="metric-card">
+                    <h3>Value at Risk (VaR)</h3>
+                    <div class="metric-value" id="val-var">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Expected Shortfall (CVaR)</h3>
+                    <div class="metric-value" id="val-cvar">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Max Drawdown</h3>
+                    <div class="metric-value" id="val-mdd">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Probabilidad Perdida</h3>
+                    <div class="metric-value" id="val-prob">--</div>
+                </div>
+            </div>
+
+            <div class="chart-card full-width-card" style="margin-bottom: 2rem;">
+                <div class="chart-header">
+                    <h3>Futuros Markovianos (Top 5 Activos)</h3>
+                </div>
+                <div class="chart-wrapper" style="height: 450px;">
+                    <canvas id="markovChart"></canvas>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <!-- 1. Histograma -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Distribucion de Retornos</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="histChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 3. Line Chart Trayectorias -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Trayectorias Simuladas (Precios)</h3>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggle-paths" checked> Mostrar Trayectorias
+                        </label>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="pathsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 2. Heatmap Correlacion -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Matriz de Correlacion</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="corrChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 4. Bar Chart Metricas por Horizonte -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Riesgo por Horizonte</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="horizonChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 5. Pie Sectorial -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Asignacion Sectorial</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="sectorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 6. Scatter Frontera -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Riesgo-Retorno Activos</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="scatterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
